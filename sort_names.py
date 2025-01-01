@@ -26,10 +26,6 @@ def generate_output(separated_names):
         output += f"{i}\t{last_name}\t{first_name}\n"
     return output
 
-def copy_to_clipboard(output_text):
-    st.session_state.clipboard = output_text
-    st.success("Kết quả đã được sao chép vào clipboard (giả lập).")
-
 # Giao diện Streamlit
 st.title("Quản lý danh sách họ tên")
 
@@ -60,6 +56,5 @@ if st.button("Xử lý"):
                 mime="text/plain"
             )
 
-            # Sao chép kết quả
-            if st.button("Sao chép kết quả"):
-                copy_to_clipboard(output_text)
+            # Hiển thị kết quả để sao chép thủ công
+            st.text_area("Kết quả đã xử lý (sao chép thủ công):", value=output_text, height=200)
