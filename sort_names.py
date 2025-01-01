@@ -1,8 +1,5 @@
 import streamlit as st
-from icu import Collator, Locale
-
-# Thiết lập Collator cho tiếng Việt
-collator = Collator.createInstance(Locale("vi_VN"))
+from unidecode import unidecode
 
 def process_names(input_text):
     names = [name.strip() for name in input_text.strip().split("\n") if name.strip()]
@@ -19,8 +16,8 @@ def process_names(input_text):
             first_name = parts[-1]
             separated_names.append((last_name, first_name))
 
-    # Sắp xếp theo Collator
-    separated_names.sort(key=lambda x: (collator.getSortKey(x[1]), collator.getSortKey(x[0])))
+    # Sắp xếp không phân biệt dấu
+    separated_names.sort(key=lambda x: (unidecode(x[1]).lower(), unidecode(x[0]).lower()))
     return names, separated_names
 
 def generate_output(separated_names):
