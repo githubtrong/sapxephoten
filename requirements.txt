@@ -1,3 +1,2 @@
 streamlit
 unidecode
-python_version == "3.9"
